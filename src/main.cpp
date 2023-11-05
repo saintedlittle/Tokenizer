@@ -1,22 +1,26 @@
 #include <iostream>
 #include <vector>
-
-#include "tokenizer/Tokenizer.h"
+#include "tokenizer/Tokenizer.h"  // Подключаем заголовочный файл для токенизации
 
 using namespace std;
 using namespace tokenizer;
 
 int main() {
-    vector<Token> tokensInfix;
+    vector<Token> tokensInfix;  // Вектор для хранения токенов
 
-    string expr = "log2(23)+(2/(3.14))*(sqrt(0.1*10^(-3)/0.02))";
-    cout << "Expression: " << expr << endl;
+    string expr;
+    cout << "Specify expression: ";
+    getline(cin, expr);  // Запрашиваем у пользователя ввод выражения
+    cout << "Expression: " << expr << endl;  // Выводим введенное выражение
 
     try {
-        tokenize(expr, tokensInfix);
-        // Красиво печатаем токены в консоль
+        tokenize(expr, tokensInfix);  // Выполняем токенизацию введенного выражения
+
+        // Красиво выводим токены в консоль
         for (auto& i : tokensInfix) {
             string type, asc;
+
+            // Определяем тип токена и присваиваем соответствующую строку
             switch (i.getType()) {
                 case Token::OPERATOR:
                     type = "OPERATOR";
@@ -37,10 +41,11 @@ int main() {
                     type = "FUNCTION";
                     break;
                 case Token::SEPARATOR:
-                    type = "OPERATOR";
+                    type = "SEPARATOR";
                     break;
             }
 
+            // Определяем ассоциативность токена и присваиваем соответствующую строку
             switch (i.getAsc()) {
                 case Token::NONE:
                     asc = "NONE";
@@ -52,18 +57,20 @@ int main() {
                     asc = "LEFT";
                     break;
             }
+
+            // Выводим токен, его тип и ассоциативность
             cout << i.getStr() << "\t\t" << type << "\t\t" << asc << "\n";
         }
 
     }
     catch (Error &e) {
-        cerr << e.what() << "\n";
-        exit(-1);
+        cerr << e.what() << "\n";  // Обработка ошибок и вывод сообщения об ошибке
+        exit(-1);  // Завершаем программу с кодом ошибки
     }
     catch (const exception& e) {
-        cerr << e.what() << '\n';
-        exit(-1);
+        cerr << e.what() << '\n';  // Обработка исключений стандартной библиотеки
+        exit(-1);  // Завершаем программу с кодом ошибки
     }
 
-    return EXIT_SUCCESS;
+    return EXIT_SUCCESS;  // Завершаем программу с кодом успешного выполнения
 }

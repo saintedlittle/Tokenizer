@@ -1,6 +1,5 @@
-//
+// Класс Token представляет токен в библиотеке токенизации.
 // Created by saintedlittle on 05.11.2023.
-//
 
 #pragma once
 
@@ -18,40 +17,63 @@ using namespace std;
 namespace tokenizer {
 
     class Token {
-      public:
-        // Тип
+    public:
+        // Типы токенов
         enum Type {
-            OPERATOR,      // унарный/бинарный оператор
-            LParanthesis, // открывающая скобка
-            RParanthesis, // закрывающая скобка
-            INT_LITERAL,   // целое число
-            FLOAT_LITERAL, // число с плавающей точкой 
-            FUNCTION,      // функция
-            SEPARATOR      // разделитель аргументов функции
+            OPERATOR,      // Унарный/бинарный оператор
+            LParanthesis, // Открывающая скобка
+            RParanthesis, // Закрывающая скобка
+            INT_LITERAL,   // Целое число
+            FLOAT_LITERAL, // Число с плавающей точкой
+            FUNCTION,      // Функция
+            SEPARATOR      // Разделитель аргументов функции
         };
 
-        // Ассоциативность
+        // Ассоциативность операторов
         enum OperatorAssociativity {
-            NONE,  // токен - не оператор
-            RIGHT, // правоассоциативный
-            LEFT   // левоассоциативный
+            NONE,  // Токен не является оператором
+            RIGHT, // Правоассоциативный оператор
+            LEFT   // Левоассоциативный оператор
         };
 
+        /**
+         * Конструктор класса Token.
+         * @param token Строковое представление токена.
+         * @param type Тип токена (оператор, скобка, число и т. д.).
+         * @param asc Ассоциативность оператора (RIGHT, LEFT) по умолчанию NONE.
+         */
         Token(string token, Type type, OperatorAssociativity asc = NONE);
 
-        // Приоритет
+        /**
+         * Возвращает приоритет оператора.
+         * @return Приоритет оператора.
+         */
         int getPrecendance() const;
 
+        /**
+         * Получает тип токена.
+         * @return Тип токена (OPERATOR, LParanthesis и т. д.).
+         */
         const Type& getType() const  { return type; }
+
+        /**
+         * Получает ассоциативность оператора.
+         * @return Ассоциативность оператора (RIGHT, LEFT, NONE).
+         */
         const OperatorAssociativity& getAsc() const { return opAsc; }
+
+        /**
+         * Получает строковое представление токена.
+         * @return Строковое представление токена.
+         */
         const string& getStr() const { return str; }
 
-      private:
-        Type type;
-        OperatorAssociativity opAsc;
-        string str;
+    private:
+        Type type;                   // Тип токена
+        OperatorAssociativity opAsc; // Ассоциативность оператора
+        string str;                  // Строковое представление токена
     };
 
-} // tokenizator
+} // namespace tokenizer
 
 #endif //TOKENIZER_TOKEN_H

@@ -1,11 +1,9 @@
-//
 // Created by saintedlittle on 05.11.2023.
 //
 
 #include "Tokenizer.h"
 
 namespace tokenizer {
-
 
     void tokenize(const string &expr, vector<Token> &tokens) {
         State state = S0;
@@ -26,7 +24,7 @@ namespace tokenizer {
             isParanth = isLParanth || isRParanth;
             isPoint = s == '.';
             isSep = s == ',';
-            isOp = validOperators.find(s) != validOperators.npos;
+            isOp = validOperators.find(s) != string::npos;
 
             // Если тип символа неопределен, значит ошибка в синтаксисе
             if (!(isDigit || isLetter || isParanth || isPoint || isSep || isOp))
@@ -125,4 +123,4 @@ namespace tokenizer {
             tokens.emplace_back(buffer, bufferTokenType);
     }
 
-} // tokenizer
+} // namespace tokenizer

@@ -29,6 +29,12 @@ namespace tokenizer {
         S5  // Токенизация записанного числа/функции из буфера
     };
 
+    /**
+    * Токенизирует входное выражение и сохраняет токены в векторе.
+    *
+    * @param expr Входное математическое выражение в виде строки.
+    * @param tokens Вектор для хранения токенов.
+    */
     void tokenize(const string &expr, vector<Token> &tokens);
 
 } // tokenizer

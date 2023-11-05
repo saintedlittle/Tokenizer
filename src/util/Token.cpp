@@ -5,7 +5,6 @@
 
 #include <utility>
 
-
 tokenizer::Token::Token(string token, tokenizer::Token::Type type, tokenizer::Token::OperatorAssociativity asc) : type{type} , str{std::move(token)} {
     if (type == OPERATOR && asc == NONE)
         throw logic_error("Associativity required!");
@@ -26,7 +25,6 @@ int tokenizer::Token::getPrecendance() const {
                     {"^", 5}
     };
 
-
     static map<string, int> op_rightAssociative = {
                     {"-", 4} // унарное отрицание
     };
@@ -45,5 +43,4 @@ int tokenizer::Token::getPrecendance() const {
     }
 
     throw logic_error(format("Token \"{}\" is not an operator, impossible.", str));
-
 }
