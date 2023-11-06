@@ -8,4 +8,7 @@ add_executable(Tokenizer src/main.cpp
         src/tokenizer/Tokenizer.cpp
         src/tokenizer/Tokenizer.h
         src/util/Error.h
-        src/util/Token.cpp)
+        src/util/Token.cpp
+        src/interface/MainWindow.cpp
+        src/interface/MainWindow.h
+)
